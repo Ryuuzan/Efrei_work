@@ -1,12 +1,22 @@
-<form action="index.php" method="post">
-Name: <input type="text" name="name">
-<input type="submit">
-</form>
-<ul>
-<?php $filename = 'friends.txt';
-$file = fopen( $filename, "r" );
-while (!feof($file)&&filesize('friends.txt') != 0) {
-    echo "<li>".fgets($file)."</li>";
+<?php 
+$filename = 'friends.txt';
+if(isset($_POST["name"]))
+{
+	$file = fopen( $filename, "a" );
+	fwrite( $file, PHP_EOL.$_POST["name"] );
+	fclose($file);
 }
 ?>
-</ul>
+
+
+<form action="index.php" method="post">
+	Name: <input type="text" name="name">
+	<input type="submit">
+</form>
+<?php
+$file = fopen( $filename, "r" );
+while (!feof($file)) {
+    echo "<li>".fgets($file)."</li>";
+}
+fclose($file);
+?>
