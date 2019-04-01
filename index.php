@@ -1,10 +1,11 @@
 <?php 
 $filename = 'friends.txt';
 if(isset($_POST["name"]))
-{
+{	if($_POST["name"]!=""){
 	$file = fopen( $filename, "a" );
 	fwrite( $file, PHP_EOL.$_POST["name"] );
 	fclose($file);
+}
 }
 ?>
 
